@@ -1,17 +1,50 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+      <ViewChange @toggleBtnClicked="handleViewChange"/>
+      <h2>Tweets:</h2>
+      <TweetComp :class="[{displayView: isGrid}]" v-for="tweet in tweets" 
+      :key="tweet.content"
+      :tweetContent="tweets.content"
+      :tweetUser="tweets.user"
+      :tweetDate="tweets.date"
+
+      />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TweetComp from './components/TweetComp.vue'
+import ViewChange from './components/ViewChange.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    TweetComp,
+    ViewChange
+  },
+  data: function() {
+    return {
+      displayView: 'isGrid',
+      isGrid: true,
+
+      tweets: [
+        {
+          content: "This is my first tweet",
+          user: "Jane",
+          date: "Aug 14, 2021"
+        },
+        {
+          content: "I really do not understand the appeal of Twitter",
+          user: "Unkown_99",
+          date: "Jul 14, 2021"
+        },
+        {
+          content: "What did the shark say when it ate the clownfish?....It tastes a little funny",
+          user: "joker23",
+          date: "Apr 1, 2021"
+        }
+      ]
+    }
   }
 }
 </script>
